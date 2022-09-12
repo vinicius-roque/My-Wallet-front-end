@@ -5,13 +5,13 @@ import { FormWrapper } from "../../Globally/styles";
 
 export default function TransactionForms({ userData }) {
     const { state } = useLocation();
-    const transactionWord = state === "earn" ? "entrada" : "saída";
+    const spentOrEarn = state === "earn" ? "entrada" : "saída";
     const config = {
         headers: {
             "Authorization": `Bearer ${userData.token}`
         }
     };
-    const [form, handleForm] = useForm({
+    const [forms, holdForms] = useForm({
         initState: {
             type: state,
             value: "",
@@ -25,7 +25,7 @@ export default function TransactionForms({ userData }) {
         e.preventDefault();
         const promise = createTransaction(
             {
-                ...form,
+                ...forms,
                 date: new Date(),
             },
             config
@@ -51,27 +51,27 @@ export default function TransactionForms({ userData }) {
 
     return (
         <FormWrapper centered={false}>
-            <h2>Nova {transactionWord}</h2>
+            <h2>Nova {spentOrEarn}</h2>
             <form onSubmit={sendForm}>
                 <input
                     type="text"
                     placeholder="Valor"
                     name="value"
-                    value={form.value}
-                    onChange={handleForm}
+                    value={forms.value}
+                    onChange={holdForms}
                     required
                 ></input>
                 <input
                     type="text"
                     placeholder="Descrição"
                     name="description"
-                    value={form.description}
-                    onChange={handleForm}
+                    value={forms.description}
+                    onChange={holdForms}
                     required
                 ></input>
                 <input 
                     type="submit"
-                    value={"Salvar " + transactionWord}
+                    value={"Salvar " + spentOrEarn}
                 ></input>
             </form>
         </FormWrapper>

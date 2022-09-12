@@ -4,7 +4,7 @@ import { useForm } from "../../Globally/useForm";
 import { login } from "../../Services/ports";
 
 export default function SignIn({ setUserData }) {
-    const [form, handleForm] = useForm({
+    const [forms, holdForms] = useForm({
         initState: {
             email: "",
             password: "",
@@ -14,7 +14,7 @@ export default function SignIn({ setUserData }) {
     function sendForm(e) {
         e.preventDefault();
         
-        const promise = login(form);
+        const promise = login(forms);
 
         promise
         .then(res => {
@@ -32,16 +32,16 @@ export default function SignIn({ setUserData }) {
                     type="email"
                     placeholder="E-mail"
                     name="email"
-                    value={form.email}
-                    onChange={handleForm}
+                    value={forms.email}
+                    onChange={holdForms}
                     required
                 ></input>
                 <input
                     type="password"
                     placeholder="Senha"
                     name="password"
-                    value={form.password}
-                    onChange={handleForm}
+                    value={forms.password}
+                    onChange={holdForms}
                     required
                 ></input>
                 <input

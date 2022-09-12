@@ -4,7 +4,7 @@ import { useForm } from "../../Globally/useForm";
 import { registerUser } from "../../Services/ports";
 
 export default function SignUp() {
-    const [form, handleForm] = useForm({
+    const [forms, holdForms] = useForm({
         initState: {
             name: "",
             email: "",
@@ -16,7 +16,7 @@ export default function SignUp() {
 
     function sendForm(e) {
         e.preventDefault();
-        const promise = registerUser(form);
+        const promise = registerUser(forms);
         
         promise
         .then(() => navigate('/'))
@@ -52,32 +52,32 @@ export default function SignUp() {
                     type="text"
                     placeholder="Nome"
                     name="name"
-                    value={form.name}
-                    onChange={handleForm}
+                    value={forms.name}
+                    onChange={holdForms}
                     required
                 ></input>
                 <input
                     type="email"
                     placeholder="E-mail"
                     name="email"
-                    value={form.email}
-                    onChange={handleForm}
+                    value={forms.email}
+                    onChange={holdForms}
                     required
                 ></input>
                 <input
                     type="password"
                     placeholder="Senha"
                     name="password"
-                    value={form.password}
-                    onChange={handleForm}
+                    value={forms.password}
+                    onChange={holdForms}
                     required
                 ></input>
                 <input
                     type="password"
                     placeholder="Confirme a senha"
                     name="passwordConfirmation"
-                    value={form.passwordConfirmation}
-                    onChange={handleForm}
+                    value={forms.passwordConfirmation}
+                    onChange={holdForms}
                     required
                 ></input>
                 <input 

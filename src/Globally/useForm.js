@@ -1,12 +1,12 @@
 import { useReducer } from "react";
 
 const ACTION_TYPES = Object.freeze({
-    handleForm: "handleForm",
+    holdForms: "holdForms",
     resetForm: "resetForm",
 })
 
 function formReducer(state, action) {
-    if (action.type === ACTION_TYPES.handleForm) {
+    if (action.type === ACTION_TYPES.holdForms) {
         return {
             ...state,
             [action.name]: action.value, 
@@ -20,18 +20,18 @@ function formReducer(state, action) {
 }
 
 function useForm ({ initState = {}, reducer = formReducer }) {
-    const [form, dispatch] = useReducer(reducer, initState);
+    const [forms, dispatch] = useReducer(reducer, initState);
 
-    function handleForm(e) {
+    function holdForms(e) {
         const { name, value } = e.target;
-        dispatch({ type: ACTION_TYPES.handleForm, name, value })
+        dispatch({ type: ACTION_TYPES.holdForms, name, value })
     }
 
     function resetForm() {
         dispatch({ type: ACTION_TYPES.resetForm, initState })
     }
 
-    return [form, handleForm, resetForm]
+    return [forms, holdForms, resetForm]
 }
 
 export { useForm, formReducer, ACTION_TYPES }
